@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171512">
+  <title>Chi sono — Andrea Pisano Art</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { background: #f5f2ec; }
+    .about-nav { background: #201e1a; }
+    .about-nav .navbar-brand { color: #fff; font: 1.35rem Georgia,serif; }
+    .about-nav .navbar-brand em { color: #d0aa7f; }
+    .about-nav .nav-link { color: #f7f2e9; }
+    .about-nav .navbar-toggler { border-color: #ffffff70; }
+    .about-nav .navbar-toggler-icon { filter: invert(1); }
+    .about-wrap { min-height: calc(100svh - 72px); display: grid; grid-template-columns: 1fr 1fr; }
+    .about-image { min-height: 560px; background: linear-gradient(#17151220,#17151220), url('assets/demo-artwork.jpg') center/cover; }
+    .about-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 7vw, 7rem); }
+    .about-copy .eyebrow { color: #9a704e; letter-spacing: .2em; text-transform: uppercase; font-size: .7rem; font-weight: 700; }
+    .about-copy h1 { font: clamp(2.8rem, 5vw, 5rem)/1 Georgia,serif; margin: 1rem 0 1.5rem; }
+    .about-copy p { color: #716b63; line-height: 1.9; }
+    .about-note { margin-top: 1rem; padding: 1rem 1.2rem; border-left: 2px solid #b68e68; background: #ebe5db; font-size: .9rem; }
+    .about-footer { padding: 1.4rem; color: #77736d; font-size: .72rem; text-align: center; }
+    @media(max-width:767.98px) { .about-wrap { grid-template-columns: 1fr; } .about-image { min-height: 38vh; } .about-copy { padding: 2.5rem 1.5rem 4rem; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg about-nav sticky-top">
+    <div class="container-fluid px-3 px-lg-5">
+      <a class="navbar-brand" href="index.html">Andrea Pisano <em>Art</em></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#aboutNavigation" aria-controls="aboutNavigation" aria-expanded="false" aria-label="Apri il menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="aboutNavigation">
+        <ul class="navbar-nav ms-auto gap-lg-3 pt-3 pt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="galleria.html">Galleria</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="chi-sono.html">Chi sono</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contatti">Contatti</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="about-wrap">
+    <div class="about-image" role="img" aria-label="Immagine artistica provvisoria"></div>
+    <section class="about-copy">
+      <p class="eyebrow">Dietro le opere</p>
+      <h1>Piacere,<br>sono Andrea.</h1>
+      <p>Qui troverà spazio la storia di Andrea Pisano: il suo percorso, le ispirazioni e la ricerca sui materiali che danno vita alle opere su tela e ardesia.</p>
+      <p>Ogni lavoro nasce da un'idea e prende forma attraverso colori, segni e superfici. Questa pagina potrà essere completata con una biografia, fotografie dell'artista e qualche parola sul suo modo di creare.</p>
+      <div class="about-note">Testo introduttivo provvisorio: da personalizzare con la storia e le parole di Andrea.</div>
+      <div class="mt-4"><a class="btn btn-dark rounded-0 px-4 py-3" href="galleria.html">Scopri le opere <i class="bi bi-arrow-right ms-2"></i></a></div>
+    </section>
+  </main>
+  <footer class="about-footer">ANDREA PISANO ART · OPERE SU TELA E ARDESIA</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

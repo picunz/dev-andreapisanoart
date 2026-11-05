@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171512">
+  <meta name="description" content="Andrea Pisano Art — opere artistiche su tela e ardesia.">
+  <title>Andrea Pisano Art</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root { --ap-ink: #f7f2e9; --ap-gold: #d7b58a; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #171512; color: var(--ap-ink); }
+    .landing { min-height: 100svh; position: relative; isolation: isolate; display: flex; flex-direction: column; overflow: hidden; }
+    .landing::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url('assets/demo-artwork.jpg') center 28% / cover no-repeat; transform: scale(1); }
+    .landing::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(15,14,12,.76), rgba(15,14,12,.28) 70%), linear-gradient(0deg, rgba(15,14,12,.55), transparent 60%); }
+    .landing-nav { background: transparent; padding: 1.15rem clamp(1rem, 5vw, 5rem); }
+    .landing-brand { color: #fff !important; font-family: Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.55rem); letter-spacing: .02em; }
+    .landing-brand em { color: var(--ap-gold); font-style: italic; }
+    .landing-nav .nav-link { color: #fff; opacity: .88; padding: .7rem .8rem !important; }
+    .landing-nav .nav-link:hover { color: var(--ap-gold); }
+    .landing-nav .navbar-toggler { border-color: #ffffff70; padding: .45rem .65rem; }
+    .landing-nav .navbar-toggler-icon { filter: invert(1); }
+    .landing-content { width: min(1100px, 100%); margin: auto; padding: clamp(5rem, 12vh, 9rem) clamp(1.4rem, 8vw, 8rem) clamp(4rem, 10vh, 7rem); }
+    .landing-kicker { text-transform: uppercase; letter-spacing: .28em; font-size: .72rem; color: var(--ap-gold); margin-bottom: 1.5rem; }
+    .landing-title { font-family: "Brush Script MT", "Segoe Script", "URW Chancery L", cursive; font-size: clamp(4.1rem, 12vw, 9.8rem); line-height: .9; font-weight: 500; letter-spacing: -.045em; margin: 0 0 1.5rem; text-shadow: 0 5px 35px #0008; }
+    .landing-title span { display: block; color: #f1d7b5; font-size: .82em; margin-left: clamp(1.8rem, 10vw, 8rem); }
+    .landing-copy { max-width: 34rem; color: #f4eee5d9; font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.8; margin: 0 0 2.2rem; }
+    .landing-cta { display: inline-flex; align-items: center; gap: .85rem; padding: .95rem 1.5rem; color: #1d1a16; background: #e7cba8; border: 1px solid #e7cba8; border-radius: 2px; text-decoration: none; text-transform: uppercase; font-size: .76rem; letter-spacing: .16em; transition: .2s ease; }
+    .landing-cta:hover { background: #fff2df; border-color: #fff2df; color: #1d1a16; transform: translateY(-2px); }
+    .landing-bottom { display: flex; justify-content: space-between; gap: 1rem; padding: 1.2rem clamp(1rem, 5vw, 5rem); color: #ffffffa8; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+    .landing-bottom a { color: inherit; text-decoration: none; }
+    .contact-strip { background: #f4efe7; color: #28231e; padding: 4rem 1.5rem; text-align: center; }
+    .contact-strip h2 { font: 2.5rem Georgia, serif; margin-bottom: 1rem; }
+    .contact-strip a { color: #76583e; }
+    @media (max-width: 575.98px) {
+      .landing::after { background: linear-gradient(90deg, rgba(15,14,12,.72), rgba(15,14,12,.34)), linear-gradient(0deg, rgba(15,14,12,.62), transparent 70%); }
+      .landing-content { padding-top: 5rem; padding-bottom: 4rem; }
+      .landing-title { font-size: clamp(4rem, 19vw, 6rem); }
+      .landing-copy { max-width: 27rem; }
+      .landing-bottom { font-size: .58rem; letter-spacing: .08em; }
+    }
+  </style>
+</head>
+<body>
+  <main class="landing">
+    <nav class="navbar navbar-expand-lg landing-nav" aria-label="Navigazione principale">
+      <div class="container-fluid px-0">
+        <a class="navbar-brand landing-brand" href="index.html">Andrea Pisano <em>Art</em></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavigation" aria-controls="landingNavigation" aria-expanded="false" aria-label="Apri il menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="landingNavigation">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3 pt-3 pt-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="galleria.html">Galleria</a></li>
+            <li class="nav-item"><a class="nav-link" href="chi-sono.html">Chi sono</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contatti">Contatti</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="landing-content">
+      <p class="landing-kicker">Arte · Materia · Emozione</p>
+      <h1 class="landing-title">Andrea Pisano<span> Art</span></h1>
+      <p class="landing-copy">Opere che prendono forma sulla tela e sull’ardesia. Un percorso tra colori, superfici e dettagli da scoprire da vicino.</p>
+      <a class="landing-cta" href="galleria.html">Entra nella galleria <i class="bi bi-arrow-right"></i></a>
+    </section>
+    <div class="landing-bottom"><span>Opere originali · Tela e ardesia</span><a href="chi-sono.html">Scopri l'artista <i class="bi bi-arrow-up-right"></i></a></div>
+  </main>
+
+  <section class="contact-strip" id="contatti">
+    <div class="container">
+      <p class="text-uppercase small mb-2" style="letter-spacing:.2em">Un'opera ti ha colpito?</p>
+      <h2>Parliamone.</h2>
+      <p class="mb-0">Per informazioni sulle opere e collaborazioni, <a href="mailto:info@andreapisano.art">scrivimi</a>.</p>
+      <p class="small text-secondary mt-3 mb-0">Indirizzo e-mail provvisorio: da sostituire con quello reale.</p>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

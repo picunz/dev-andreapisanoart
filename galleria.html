@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galleria — Andrea Pisano Art</title>
+  <meta name="theme-color" content="#171512">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg gallery-nav sticky-top">
+    <div class="container-fluid px-3 px-lg-5">
+      <a class="navbar-brand gallery-brand" href="index.html">Andrea Pisano <em>Art</em></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Apri il menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavigation">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="galleria.html">Galleria</a></li>
+          <li class="nav-item"><a class="nav-link" href="chi-sono.html">Chi sono</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contatti">Contatti</a></li>
+          <li class="nav-item nav-admin"><button class="btn btn-sm btn-outline-light" id="resetDemo">Ripristina demo</button></li>
+          <li class="nav-item nav-admin"><button class="btn btn-sm btn-light" id="addBtn">＋ Aggiungi opera</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Andrea Pisano Art · La collezione</div>
+      <h1>La galleria<br><i>delle opere.</i></h1>
+      <p>Esplora le opere di Andrea Pisano, realizzate su tela e ardesia. Apri ogni lavoro, osserva i dettagli e scopri la storia che lo accompagna.</p>
+    </div>
+    <div class="hero-note">“Ogni superficie racconta una storia diversa. Avvicinati, guarda la materia, scopri il dettaglio.”</div>
+  </section>
+
+  <div class="toolbar">
+    <div class="filters">
+      <button class="filter active" data-filter="Tutte">Tutte le opere</button>
+      <button class="filter" data-filter="Tela">Su tela</button>
+      <button class="filter" data-filter="Ardesia">Su ardesia</button>
+    </div>
+    <input class="search" id="search" placeholder="Cerca un'opera…" aria-label="Cerca un'opera">
+  </div>
+
+  <main class="gallery" id="gallery"></main>
+
+  <footer>
+    <span>ANDREA PISANO ART · GALLERIA</span>
+    <span>Una collezione in continua evoluzione</span>
+  </footer>
+
+  <div class="overlay" id="detailOverlay">
+    <section class="dialog">
+      <button class="close" data-close="detailOverlay" aria-label="Chiudi">×</button>
+      <div class="detail-grid">
+        <div class="viewer-column">
+          <div class="viewer-toolbar">
+            <div class="zoom-actions">
+              <button class="zoom-btn" data-zoom="fit">Adatta</button>
+              <button class="zoom-btn" data-zoom="2">2×</button>
+              <button class="zoom-btn" data-zoom="4">4×</button>
+              <button class="zoom-btn" data-zoom="6">6×</button>
+            </div>
+            <span class="zoom-readout" id="zoomReadout">Zoom 100%</span>
+          </div>
+          <div id="osd"></div>
+          <div class="viewer-hint">Rotellina o pinch per ingrandire · trascina per esplorare · i pulsanti mostrano i livelli di zoom</div>
+        </div>
+        <div class="detail-content" id="detailContent"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="overlay" id="formOverlay">
+    <section class="dialog admin">
+      <button class="close" data-close="formOverlay" aria-label="Chiudi">×</button>
+      <h2 id="formTitle">Aggiungi un'opera</h2>
+      <form id="artForm">
+        <input type="hidden" id="artId">
+        <div class="form-grid">
+          <div class="field">
+            <label for="title">Titolo dell'opera *</label>
+            <input id="title" required placeholder="Es. Trame della natura">
+          </div>
+          <div class="field">
+            <label for="support">Supporto *</label>
+            <select id="support"><option>Tela</option><option>Ardesia</option></select>
+          </div>
+          <div class="field">
+            <label for="technique">Tecnica</label>
+            <input id="technique" placeholder="Tecnica mista">
+          </div>
+          <div class="field">
+            <label for="dimensions">Dimensioni</label>
+            <input id="dimensions" placeholder="30 × 40 cm">
+          </div>
+          <div class="field full">
+            <label for="description">Descrizione</label>
+            <textarea id="description" placeholder="Racconta l'opera, i materiali e la sua ispirazione…"></textarea>
+          </div>
+          <div class="field">
+            <label for="status">Disponibilità</label>
+            <select id="status"><option>Disponibile</option><option>Venduta</option><option>In esposizione</option></select>
+          </div>
+          <div class="field">
+            <label for="year">Anno</label>
+            <input id="year" placeholder="2026">
+          </div>
+          <div class="field full">
+            <label for="mainImage">Fotografia principale</label>
+            <input id="mainImage" type="file" accept="image/*">
+            <span class="small-note">Per sfruttare lo zoom, usa una foto originale ad alta risoluzione (idealmente 3000–6000 pixel sul lato maggiore).</span>
+          </div>
+          <div class="field full">
+            <label for="extraImages">Fotografie aggiuntive</label>
+            <input id="extraImages" type="file" accept="image/*" multiple>
+          </div>
+        </div>
+
+        <div class="review-editor">
+          <h3>Prima testimonianza (facoltativa)</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label for="reviewer">Nome cliente</label>
+              <input id="reviewer" placeholder="Nome o iniziali">
+            </div>
+            <div class="field">
+              <label for="reviewPhoto">Foto del cliente / opera collocata</label>
+              <input id="reviewPhoto" type="file" accept="image/*">
+            </div>
+            <div class="field full">
+              <label for="reviewText">Recensione</label>
+              <textarea id="reviewText" placeholder="Una breve testimonianza…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn danger" id="deleteBtn" hidden>Elimina opera</button>
+          <div style="margin-left:auto; display:flex; gap:8px">
+            <button type="button" class="btn" data-close="formOverlay">Annulla</button>
+            <button class="btn primary" type="submit">Salva opera</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+ANDREA PISANO ART — PROTOTIPO
+
+PAGINE
+- index.html: pagina iniziale / vetrina.
+- galleria.html: catalogo interattivo con zoom OpenSeadragon e gestione opere.
+- chi-sono.html: pagina biografica da completare.
+
+COME APRIRE
+Aprire index.html con un browser moderno. Bootstrap, Bootstrap Icons e OpenSeadragon
+sono caricati da CDN: per menu, icone e zoom è necessaria una connessione Internet.
+
+PERSONALIZZAZIONE
+- Sostituire assets/demo-artwork.jpg con una fotografia del quadro scelto per la copertina.
+  Mantenere lo stesso nome file oppure aggiornare il riferimento CSS in index.html e chi-sono.html.
+- Completare chi-sono.html con biografia e fotografie reali.
+- Sostituire l'indirizzo info@andreapisano.art in index.html con il contatto corretto.
+- Aprire galleria.html e usare “Aggiungi opera” per inserire le opere dimostrative.
+
+NOTA
+I testi della pagina “Chi sono”, l'indirizzo email e l'immagine di copertina sono segnaposto.
+La foto demo è un'immagine provvisoria, non una fotografia di un'opera reale.
+Il catalogo salva i dati nel browser/dispositivo: per un sito pubblicato e sincronizzato
+tra telefono, tablet e computer servirà in seguito un archivio online con area riservata.
