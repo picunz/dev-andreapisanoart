@@ -43,6 +43,20 @@ function readArtworks(string $dataFile): array
     $json = file_get_contents($dataFile);
     $data = json_decode($json === false ? '' : $json, true);
     if (!is_array($data)) respond(500, ['error' => 'Archivio opere non valido.']);
+    foreach ($data as &$artwork) {
+        if (!is_array($artwork)) continue;
+        $artwork['image'] = normalizeImagePath($artwork['image'] ?? null) ?? (string)($artwork['image'] ?? '');
+        $artwork['extras'] = normalizeImageList($artwork['extras'] ?? []);
+        if (isset($artwork['reviews']) && is_array($artwork['reviews'])) {
+            foreach ($artwork['reviews'] as &$review) {
+                if (is_array($review) && !empty($review['photo'])) {
+                    $review['photo'] = normalizeImagePath($review['photo']) ?? $review['photo'];
+                }
+            }
+            unset($review);
+        }
+    }
+    unset($artwork);
     return array_values($data);
 }
 
@@ -64,31 +78,24 @@ function requireAdmin(): void
     }
 }
 
+function normalizeImagePath($value): ?string
+{
+    if (!is_string($value) || $value === '') return null;
+    $path = parse_url($value, PHP_URL_PATH);
+    if (!is_string($path) || preg_match('#(?:^|/)uploads/([a-f0-9]{32}\.(?:jpg|png|gif|webp))$#i', $path, $matches) !== 1) return null;
+    return 'uploads/' . strtolower($matches[1]);
+}
+
 function normalizeImageList($value): array
 {
     if (is_string($value)) $value = [$value];
     if (!is_array($value)) return [];
-    return array_values(array_filter($value, static function ($path): bool {
-        return is_string($path) && preg_match('#^/uploads/[a-f0-9]{32}\.(jpg|png|gif|webp)$#', $path) === 1;
-    }));
-}
-
-function removeUnusedUploads(array $oldArtwork, array $newArtwork, string $uploadsDir): void
-{
-    $kept = array_fill_keys(array_merge(
-        normalizeImageList([$oldArtwork['image'] ?? '']),
-        normalizeImageList($oldArtwork['extras'] ?? []),
-        normalizeImageList($oldArtwork['reviews'][0]['photo'] ?? '')
-    ), true);
-    $used = array_fill_keys(array_merge(
-        normalizeImageList([$newArtwork['image'] ?? '']),
-        normalizeImageList($newArtwork['extras'] ?? []),
-        normalizeImageList($newArtwork['reviews'][0]['photo'] ?? '')
-    ), true);
-    foreach (array_diff_key($kept, $used) as $path => $_) {
-        $file = $uploadsDir . '/' . basename($path);
-        if (is_file($file)) @unlink($file);
+    $paths = [];
+    foreach ($value as $path) {
+        $normalized = normalizeImagePath($path);
+        if ($normalized !== null) $paths[] = $normalized;
     }
+    return array_values(array_unique($paths));
 }
 
 function saveUploadedFile(array $file, string $uploadsDir, int $maxUploadBytes): string
@@ -108,7 +115,7 @@ function saveUploadedFile(array $file, string $uploadsDir, int $maxUploadBytes):
     if (!move_uploaded_file($file['tmp_name'], $uploadsDir . '/' . $filename)) {
         respond(500, ['error' => 'Impossibile salvare l’immagine sul server.']);
     }
-    return '/uploads/' . $filename;
+    return 'uploads/' . $filename;
 }
 
 ensureDirectories($storageDir, $uploadsDir);
@@ -166,7 +173,9 @@ if ($action === 'save') {
     $artwork['title'] = trim((string)($artwork['title'] ?? ''));
     if ($artwork['title'] === '') respond(400, ['error' => 'Il titolo dell’opera è obbligatorio.']);
     if ($index === null && empty($_FILES['mainImage']['name'])) respond(400, ['error' => 'Carica un’immagine principale per la nuova opera.']);
-    $artwork['image'] = (string)($previous['image'] ?? $artwork['image'] ?? '');
+    $artwork['image'] = normalizeImagePath($previous['image'] ?? null)
+        ?? normalizeImagePath($artwork['image'] ?? null)
+        ?? (string)($previous['image'] ?? '');
     $artwork['extras'] = normalizeImageList($artwork['extras'] ?? $previous['extras'] ?? []);
     $incomingReviews = is_array($artwork['reviews'] ?? null) ? $artwork['reviews'] : [];
     $artwork['reviews'] = is_array($previous['reviews'] ?? null) ? $previous['reviews'] : [];
@@ -195,7 +204,6 @@ if ($action === 'save') {
     unset($item);
     if ($index === null) $artworks[] = $artwork; else $artworks[$index] = $artwork;
     writeArtworks($dataFile, $artworks);
-    if ($previous) removeUnusedUploads($previous, $artwork, $uploadsDir);
     respond(200, ['artwork' => $artwork]);
 }
 
@@ -205,7 +213,6 @@ if ($action === 'delete') {
         if (($artwork['id'] ?? null) !== $id) continue;
         array_splice($artworks, $index, 1);
         writeArtworks($dataFile, $artworks);
-        removeUnusedUploads($artwork, [], $uploadsDir);
         respond(200, ['deleted' => true]);
     }
     respond(404, ['error' => 'Opera non trovata.']);

@@ -67,86 +67,12 @@
             </div>
             <span class="zoom-readout" id="zoomReadout">Zoom 100%</span>
           </div>
+          <div class="osd-error" id="osdError" role="alert" hidden></div>
           <div id="osd"></div>
           <div class="viewer-hint">Rotellina o pinch per ingrandire · trascina per esplorare · i pulsanti mostrano i livelli di zoom</div>
         </div>
         <div class="detail-content" id="detailContent"></div>
       </div>
-    </section>
-  </div>
-
-  <div class="overlay" id="formOverlay">
-    <section class="dialog admin">
-      <button class="close" data-close="formOverlay" aria-label="Chiudi">×</button>
-      <h2 id="formTitle">Aggiungi un'opera</h2>
-      <form id="artForm">
-        <input type="hidden" id="artId">
-        <div class="form-grid">
-          <div class="field">
-            <label for="title">Titolo dell'opera *</label>
-            <input id="title" required placeholder="Es. Trame della natura">
-          </div>
-          <div class="field">
-            <label for="support">Supporto *</label>
-            <select id="support"><option>Tela</option><option>Ardesia</option></select>
-          </div>
-          <div class="field">
-            <label for="technique">Tecnica</label>
-            <input id="technique" placeholder="Tecnica mista">
-          </div>
-          <div class="field">
-            <label for="dimensions">Dimensioni</label>
-            <input id="dimensions" placeholder="30 × 40 cm">
-          </div>
-          <div class="field full">
-            <label for="description">Descrizione</label>
-            <textarea id="description" placeholder="Racconta l'opera, i materiali e la sua ispirazione…"></textarea>
-          </div>
-          <div class="field">
-            <label for="status">Disponibilità</label>
-            <select id="status"><option>Disponibile</option><option>Venduta</option><option>In esposizione</option></select>
-          </div>
-          <div class="field">
-            <label for="year">Anno</label>
-            <input id="year" placeholder="2026">
-          </div>
-          <div class="field full">
-            <label for="mainImage">Fotografia principale</label>
-            <input id="mainImage" type="file" accept="image/*">
-            <span class="small-note">Per sfruttare lo zoom, usa una foto originale ad alta risoluzione (idealmente 3000–6000 pixel sul lato maggiore).</span>
-          </div>
-          <div class="field full">
-            <label for="extraImages">Fotografie aggiuntive</label>
-            <input id="extraImages" type="file" accept="image/*" multiple>
-          </div>
-        </div>
-
-        <div class="review-editor">
-          <h3>Prima testimonianza (facoltativa)</h3>
-          <div class="form-grid">
-            <div class="field">
-              <label for="reviewer">Nome cliente</label>
-              <input id="reviewer" placeholder="Nome o iniziali">
-            </div>
-            <div class="field">
-              <label for="reviewPhoto">Foto del cliente / opera collocata</label>
-              <input id="reviewPhoto" type="file" accept="image/*">
-            </div>
-            <div class="field full">
-              <label for="reviewText">Recensione</label>
-              <textarea id="reviewText" placeholder="Una breve testimonianza…"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button type="button" class="btn danger" id="deleteBtn" hidden>Elimina opera</button>
-          <div style="margin-left:auto; display:flex; gap:8px">
-            <button type="button" class="btn" data-close="formOverlay">Annulla</button>
-            <button class="btn primary" type="submit">Salva opera</button>
-          </div>
-        </div>
-      </form>
     </section>
   </div>
 

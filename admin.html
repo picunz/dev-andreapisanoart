@@ -33,6 +33,11 @@
     .existing-image { width: 110px; font-size: 11px; color: #77736d; }
     .existing-image img { width: 110px; height: 110px; object-fit: cover; display: block; margin-bottom: 5px; }
     .existing-image label { display: flex; gap: 5px; align-items: center; }
+    .main-image-preview { width: min(280px, 100%); min-height: 80px; margin-top: 10px; position: relative; background: #e8e2d8; }
+    .main-image-preview img { display: block; max-width: 100%; max-height: 260px; object-fit: contain; }
+    .new-extra-previews { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+    .new-extra-previews .existing-image { color: #49684c; }
+    .preview-error { padding: 8px; color: #8a3f35; font-size: 12px; }
     .form-actions { justify-content: flex-end; }
     .form-actions #deleteBtn { margin-right: auto; }
     .toolbar-line { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 10px; }
@@ -80,8 +85,8 @@
           <div class="field"><label for="status">Disponibilità</label><select id="status"><option>Disponibile</option><option>Venduta</option><option>In esposizione</option></select></div>
           <div class="field"><label for="year">Anno</label><input id="year" inputmode="numeric"></div>
           <div class="field full"><label for="description">Descrizione</label><textarea id="description"></textarea></div>
-          <div class="field full"><label for="mainImage">Immagine principale</label><input id="mainImage" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><span class="small-note" id="currentMainImage"></span></div>
-          <div class="field full"><label for="extraImages">Aggiungi fotografie</label><input id="extraImages" type="file" accept="image/jpeg,image/png,image/gif,image/webp" multiple><span class="small-note">JPEG, PNG, GIF o WebP; massimo 25 MB per immagine. Le immagini aggiuntive possono essere rimosse deselezionando quelle già presenti.</span></div>
+          <div class="field full"><label for="mainImage">Immagine principale</label><input id="mainImage" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><span class="small-note" id="currentMainImage"></span><div class="main-image-preview" id="mainImagePreview" hidden></div></div>
+          <div class="field full"><label for="extraImages">Aggiungi fotografie</label><input id="extraImages" type="file" accept="image/jpeg,image/png,image/gif,image/webp" multiple><span class="small-note">JPEG, PNG, GIF o WebP; massimo 25 MB per immagine. Le immagini aggiuntive possono essere rimosse deselezionando quelle già presenti.</span><div class="new-extra-previews" id="newExtraPreviews"></div></div>
           <div class="field full" id="extraImagesWrap" hidden><label>Fotografie presenti</label><div class="existing-images" id="existingImages"></div></div>
           <div class="field full"><label><input id="isCover" type="checkbox"> Usa questa opera come copertina della homepage</label><span class="small-note">Selezionandola, la copertina precedente verrà sostituita.</span></div>
         </div>
