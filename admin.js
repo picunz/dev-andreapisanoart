@@ -3,12 +3,89 @@
   const state = { artworks: [], csrfToken: null };
   const escapeHtml = (value = "") => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 
-  async function api(url, options = {}) {
-    const response = await fetch(`api.php${url}`, { credentials: "same-origin", ...options });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || `Errore server (${response.status}).`);
-    return payload;
+  
+async function api(url, options = {}) {
+  const method = options.method || "GET";
+  const fullUrl = `api.php${url}`;
+  const startedAt = performance.now();
+
+  console.groupCollapsed(`[API] ${method} ${fullUrl}`);
+
+  // Prepara i dati della richiesta senza esporre password o token
+  let requestData = null;
+
+  if (options.body instanceof FormData) {
+    requestData = {};
+
+    for (const [key, value] of options.body.entries()) {
+      requestData[key] = value instanceof File
+        ? `${value.name} (${value.size} bytes)`
+        : key.toLowerCase().includes("password")
+          ? "***"
+          : value;
+    }
+  } else if (typeof options.body === "string") {
+    try {
+      requestData = JSON.parse(options.body);
+
+      if (requestData.password) requestData.password = "***";
+    } catch {
+      requestData = options.body;
+    }
   }
+
+  console.log("REQUEST:", {
+    method,
+    url: fullUrl,
+    data: requestData
+  });
+
+  try {
+    const response = await fetch(fullUrl, {
+      credentials: "same-origin",
+      ...options
+    });
+
+    const rawResponse = await response.text();
+
+    let payload;
+
+    try {
+      payload = JSON.parse(rawResponse);
+    } catch {
+      payload = { rawResponse };
+    }
+
+    const elapsed = Math.round(performance.now() - startedAt);
+
+    console.log("RESPONSE:", {
+      status: response.status,
+      statusText: response.statusText,
+      elapsed: `${elapsed} ms`,
+      data: payload
+    });
+
+    if (!response.ok) {
+      console.error("API ERROR:", payload);
+
+      throw new Error(
+        payload.error || `Errore server (${response.status}).`
+      );
+    }
+
+    console.log("API SUCCESS");
+
+    return payload;
+
+  } catch (error) {
+    console.error("API EXCEPTION:", error);
+    throw error;
+
+  } finally {
+    console.groupEnd();
+  }
+}
+
 
   function showNotice(target, message, success = false) {
     const node = byId(target);
