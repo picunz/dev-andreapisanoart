@@ -165,8 +165,9 @@ if ($action === 'save') {
     $artwork['id'] = $id;
     $artwork['title'] = trim((string)($artwork['title'] ?? ''));
     if ($artwork['title'] === '') respond(400, ['error' => 'Il titolo dell’opera è obbligatorio.']);
+    if ($index === null && empty($_FILES['mainImage']['name'])) respond(400, ['error' => 'Carica un’immagine principale per la nuova opera.']);
     $artwork['image'] = (string)($previous['image'] ?? $artwork['image'] ?? '');
-    $artwork['extras'] = normalizeImageList($previous['extras'] ?? $artwork['extras'] ?? []);
+    $artwork['extras'] = normalizeImageList($artwork['extras'] ?? $previous['extras'] ?? []);
     $incomingReviews = is_array($artwork['reviews'] ?? null) ? $artwork['reviews'] : [];
     $artwork['reviews'] = is_array($previous['reviews'] ?? null) ? $previous['reviews'] : [];
     if (isset($incomingReviews[0]) && is_array($incomingReviews[0])) {

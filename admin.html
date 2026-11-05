@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171512">
+  <title>Area amministrativa — Andrea Pisano Art</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { min-height: 100vh; background: #f5f2ec; }
+    .admin-header { min-height: 70px; padding: 0 clamp(18px, 5vw, 76px); display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #e5dfd5; background: #201e1a; color: #fff; }
+    .admin-header a { color: #fff; text-decoration: none; font: 23px Georgia,serif; }
+    .admin-header em { color: #d0aa7f; }
+    .admin-main { width: min(1120px, calc(100% - 36px)); margin: 42px auto 80px; }
+    .admin-intro { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 24px; }
+    .admin-intro h1 { margin: 8px 0; font: normal clamp(32px, 5vw, 48px) Georgia,serif; }
+    .admin-intro p { margin: 0; color: #77736d; font-size: 13px; }
+    .login-card, .editor-card { background: #fffdf9; border: 1px solid #e5dfd5; box-shadow: 0 18px 55px #28201612; }
+    .login-card { width: min(440px, 100%); margin: 10vh auto; padding: 30px; }
+    .login-card h1 { font: normal 30px Georgia,serif; margin: 0 0 8px; }
+    .login-card p { color: #77736d; font-size: 13px; line-height: 1.6; }
+    .notice { min-height: 20px; margin: 12px 0; color: #8a3f35; font-size: 13px; }
+    .notice.success { color: #49684c; }
+    .admin-list { display: grid; gap: 10px; margin-bottom: 24px; }
+    .admin-row { display: grid; grid-template-columns: 76px 1fr auto; align-items: center; gap: 16px; padding: 10px; background: #fffdf9; border: 1px solid #e5dfd5; }
+    .admin-row img { width: 76px; height: 76px; object-fit: cover; background: #e8e2d8; }
+    .admin-row h3 { margin: 0 0 5px; font: 20px Georgia,serif; }
+    .admin-row p { margin: 0; color: #77736d; font-size: 12px; }
+    .cover-badge { display: inline-block; margin-left: 8px; padding: 3px 6px; color: #72563c; background: #eee3d4; font: 10px sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+    .editor-card { padding: clamp(18px, 4vw, 32px); }
+    .editor-card h2 { margin: 0 0 20px; font: normal 28px Georgia,serif; }
+    .existing-images { display: flex; flex-wrap: wrap; gap: 12px; }
+    .existing-image { width: 110px; font-size: 11px; color: #77736d; }
+    .existing-image img { width: 110px; height: 110px; object-fit: cover; display: block; margin-bottom: 5px; }
+    .existing-image label { display: flex; gap: 5px; align-items: center; }
+    .form-actions { justify-content: flex-end; }
+    .form-actions #deleteBtn { margin-right: auto; }
+    .toolbar-line { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 10px; }
+    [hidden] { display: none !important; }
+    @media(max-width:600px) { .admin-row { grid-template-columns: 58px 1fr; } .admin-row img { width: 58px; height: 70px; } .admin-row .btn { grid-column: 2; justify-self: start; } .admin-intro { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <a href="index.html">Andrea Pisano <em>Art</em></a>
+    <div class="top-actions">
+      <a class="btn" href="galleria.html">Vai alla galleria</a>
+      <button class="btn" id="logoutBtn" hidden>Esci</button>
+    </div>
+  </header>
+
+  <main id="loginView" class="login-card" hidden>
+    <p class="eyebrow">Area riservata</p>
+    <h1>Accesso amministrativo</h1>
+    <p>Inserisci la password per gestire le opere e le immagini della collezione.</p>
+    <form id="loginForm">
+      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
+      <button class="btn primary" type="submit">Accedi</button>
+      <div class="notice" id="loginNotice" role="status"></div>
+    </form>
+  </main>
+
+  <main id="adminView" class="admin-main" hidden>
+    <div class="admin-intro">
+      <div><p class="eyebrow">Andrea Pisano Art · Gestione</p><h1>Le opere</h1><p>Aggiungi, aggiorna o rimuovi opere e fotografie.</p></div>
+      <button class="btn primary" id="newArtworkBtn">＋ Nuova opera</button>
+    </div>
+    <div class="notice" id="pageNotice" role="status"></div>
+    <div class="admin-list" id="artworkList"></div>
+
+    <section class="editor-card" id="editor" hidden>
+      <h2 id="editorTitle">Nuova opera</h2>
+      <form id="artworkForm">
+        <input type="hidden" id="artId">
+        <div class="form-grid">
+          <div class="field"><label for="title">Titolo *</label><input id="title" required maxlength="180"></div>
+          <div class="field"><label for="support">Supporto</label><select id="support"><option>Tela</option><option>Ardesia</option></select></div>
+          <div class="field"><label for="technique">Tecnica</label><input id="technique"></div>
+          <div class="field"><label for="dimensions">Dimensioni</label><input id="dimensions"></div>
+          <div class="field"><label for="status">Disponibilità</label><select id="status"><option>Disponibile</option><option>Venduta</option><option>In esposizione</option></select></div>
+          <div class="field"><label for="year">Anno</label><input id="year" inputmode="numeric"></div>
+          <div class="field full"><label for="description">Descrizione</label><textarea id="description"></textarea></div>
+          <div class="field full"><label for="mainImage">Immagine principale</label><input id="mainImage" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><span class="small-note" id="currentMainImage"></span></div>
+          <div class="field full"><label for="extraImages">Aggiungi fotografie</label><input id="extraImages" type="file" accept="image/jpeg,image/png,image/gif,image/webp" multiple><span class="small-note">JPEG, PNG, GIF o WebP; massimo 25 MB per immagine. Le immagini aggiuntive possono essere rimosse deselezionando quelle già presenti.</span></div>
+          <div class="field full" id="extraImagesWrap" hidden><label>Fotografie presenti</label><div class="existing-images" id="existingImages"></div></div>
+          <div class="field full"><label><input id="isCover" type="checkbox"> Usa questa opera come copertina della homepage</label><span class="small-note">Selezionandola, la copertina precedente verrà sostituita.</span></div>
+        </div>
+        <div class="review-editor">
+          <h3>Testimonianza (facoltativa)</h3>
+          <div class="form-grid">
+            <div class="field"><label for="reviewer">Nome cliente</label><input id="reviewer"></div>
+            <div class="field"><label for="reviewPhoto">Fotografia testimonianza</label><input id="reviewPhoto" type="file" accept="image/jpeg,image/png,image/gif,image/webp"></div>
+            <div class="field full"><label for="reviewText">Testo</label><textarea id="reviewText"></textarea></div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn danger" id="deleteBtn" hidden>Elimina opera</button>
+          <button type="button" class="btn" id="cancelBtn">Annulla</button>
+          <button type="submit" class="btn primary" id="saveBtn">Salva opera</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="admin.js" defer></script>
+</body>
+</html>

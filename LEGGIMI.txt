@@ -22,6 +22,8 @@ La foto demo è un'immagine provvisoria, non una fotografia di un'opera reale.
 
 ARCHIVIO ONLINE (prima fase)
 - Il sito deve essere ospitato su un server con PHP e sessioni abilitate; l'API è api.php.
+- admin.html è l'area riservata per inserire e gestire le opere; accetta le credenziali
+  configurate sul server. Non è ancora il pannello collegato alla galleria pubblica.
 - Copiare config.example.php sul server come config.local.php e sostituire il valore
   segnaposto con un hash password prodotto da PHP:
   php -r "echo password_hash('scegli-una-password-lunga', PASSWORD_DEFAULT), PHP_EOL;"
