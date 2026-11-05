@@ -19,5 +19,17 @@ PERSONALIZZAZIONE
 NOTA
 I testi della pagina “Chi sono”, l'indirizzo email e l'immagine di copertina sono segnaposto.
 La foto demo è un'immagine provvisoria, non una fotografia di un'opera reale.
-Il catalogo salva i dati nel browser/dispositivo: per un sito pubblicato e sincronizzato
-tra telefono, tablet e computer servirà in seguito un archivio online con area riservata.
+
+ARCHIVIO ONLINE (prima fase)
+- Il sito deve essere ospitato su un server con PHP e sessioni abilitate; l'API è api.php.
+- Copiare config.example.php sul server come config.local.php e sostituire il valore
+  segnaposto con un hash password prodotto da PHP:
+  php -r "echo password_hash('scegli-una-password-lunga', PASSWORD_DEFAULT), PHP_EOL;"
+- Non pubblicare config.local.php: è escluso da Git e contiene l'hash della password.
+- Le cartelle storage e uploads devono essere scrivibili dall'utente PHP. storage è
+  protetta dall'accesso HTTP; uploads accetta solo immagini e disabilita l'esecuzione PHP.
+- L'endpoint pubblico GET api.php?action=artworks restituisce il catalogo JSON.
+  Login e modifiche sono disponibili solo tramite sessione autenticata e token CSRF.
+- Gli upload accettati sono JPEG, PNG, GIF e WebP, fino a 25 MB per file.
+- L'API è predisposta per una sola copertina tramite il campo isCover. La homepage e
+  la galleria saranno collegate all'archivio nella fase successiva.
