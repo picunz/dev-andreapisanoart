@@ -453,19 +453,7 @@
 
     byId("search").addEventListener("input", renderGallery);
 
-    byId("resetDemo").addEventListener("click", async () => {
-      const confirmed = confirm("Ripristinare le opere dimostrative? Le opere inserite verranno eliminate.");
-      if (!confirmed) return;
-
-      const transaction = database.transaction(STORE_NAME, "readwrite");
-      transaction.objectStore(STORE_NAME).clear();
-      transaction.oncomplete = async () => {
-        for (const artwork of demoArtworks) {
-          await saveArtwork(artwork);
-        }
-        await refreshGallery();
-      };
-    });
+     
 
     async function refreshGallery() {
       artworks = await getAllArtworks();
