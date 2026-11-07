@@ -1,12 +1,12 @@
 :root {
-      --ink: #24221f;
-      --muted: #77736d;
-      --paper: #f5f2ec;
-      --panel: #fffdf9;
-      --line: #e5dfd5;
-      --accent: #9a704e;
-      --dark: #292722;
-      --shadow: 0 18px 55px #28201618;
+      --ink: #203943;
+      --muted: #657d83;
+      --paper: #eff9f7;
+      --panel: #ffffff;
+      --line: #d6e9e6;
+      --accent: #e85f55;
+      --dark: #176b70;
+      --shadow: 0 18px 55px #173f4818;
     }
 
     * { box-sizing: border-box; }
@@ -27,7 +27,7 @@
       justify-content: space-between;
       gap: 16px;
       border-bottom: 1px solid var(--line);
-      background: #f8f6f1;
+      background: #fbffff;
       position: sticky;
       top: 0;
       z-index: 5;
@@ -66,7 +66,7 @@
       max-width: 340px;
       justify-self: end;
       padding: 6px 0 6px 22px;
-      border-left: 1px solid #c9b8a4;
+      border-left: 1px solid #85cfc4;
       color: var(--muted);
       font: italic 17px/1.6 Georgia, serif;
     }
@@ -83,7 +83,7 @@
     }
     .filters { display: flex; flex-wrap: wrap; gap: 8px; }
     .filter { padding: 8px 12px; border: 0; background: transparent; color: var(--muted); font-size: 12px; }
-    .filter.active { background: #e9e1d6; color: var(--ink); }
+    .filter.active { background: #d9f2ed; color: #155e63; }
     .search { width: min(230px, 40vw); padding: 10px 12px; border: 1px solid var(--line); background: var(--panel); font-size: 12px; }
 
     .gallery {
@@ -93,7 +93,7 @@
       gap: 34px 22px;
     }
     .art-card { min-width: 0; cursor: pointer; }
-    .art-image { aspect-ratio: 4 / 4.6; overflow: hidden; position: relative; background: #e8e2d8; }
+    .art-image { aspect-ratio: 4 / 4.6; overflow: hidden; position: relative; background: #dcefeb; }
     .art-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s; }
     .image-load-failed img { opacity: .18; }
     .image-error-message { display: block; padding: 5px 8px; color: #fff; background: #6b3029; font-size: 11px; text-align: center; }
@@ -105,7 +105,7 @@
       top: 12px;
       left: 12px;
       padding: 6px 9px;
-      background: #f7f4eeeb;
+      background: #f7fffeeb;
       font-size: 9px;
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -132,7 +132,7 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: #171512b8;
+      background: #123640bd;
     }
     .overlay.show { display: flex; }
     .dialog {
@@ -152,11 +152,11 @@
       height: 34px;
       border: 0;
       border-radius: 50%;
-      background: #f0ece5;
+      background: #e2f3f0;
       font-size: 20px;
     }
     .detail-grid { display: grid; grid-template-columns: 1.2fr .8fr; min-height: 620px; }
-    .viewer-column { min-width: 0; background: #201f1c; }
+    .viewer-column { min-width: 0; background: #12323d; }
     .viewer-toolbar {
       min-height: 52px;
       padding: 8px 12px;
@@ -164,7 +164,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      background: #292722;
+      background: #174a54;
       color: #f5f2ec;
     }
     .viewer-toolbar .zoom-actions { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -178,7 +178,7 @@
     }
     .zoom-btn:hover { background: #ffffff2b; }
     .zoom-readout { color: #ffffffb5; font-size: 11px; white-space: nowrap; }
-    #osd { width: 100%; height: 550px; background: #201f1c; }
+    #osd { width: 100%; height: 550px; background: #12323d; }
     .viewer-hint { padding: 10px 14px; color: #ffffffa8; font-size: 10px; }
     .detail-content { padding: 48px 34px 30px; }
     .detail-content h2 { margin: 12px 0; font: normal 35px Georgia, serif; }
@@ -257,7 +257,7 @@
   min-height: 72px;
   padding-top: .65rem;
   padding-bottom: .65rem;
-  background: #201e1a;
+  background: #174a54;
   border-bottom: 1px solid #ffffff1c;
   z-index: 8;
 }
@@ -266,10 +266,10 @@
   font: 1.35rem Georgia, serif;
   letter-spacing: .01em;
 }
-.gallery-brand em { color: #d0aa7f; }
+.gallery-brand em { color: #73ded0; }
 .gallery-nav .nav-link { color: #f5f0e8; font-size: .9rem; }
 .gallery-nav .nav-link:hover,
-.gallery-nav .nav-link.active { color: #d7b58a; }
+.gallery-nav .nav-link.active { color: #7be2d4; }
 .gallery-nav .navbar-toggler { border-color: #ffffff70; }
 .gallery-nav .navbar-toggler-icon { filter: invert(1); }
 .gallery-nav .nav-admin { margin-top: .35rem; }
