@@ -83,5 +83,18 @@
     </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="sign.js"></script>
+ 
+  <script>
+    initHeroSignature('.landing-content', {
+      width: '340px',     // Larghezza ideale su desktop
+      maxWidth: '50%',    // Su mobile si adatta senza diventare enorme
+      bottom: '8%',       // Distanza dal bordo basso
+      right: '6%',        // Distanza dal bordo destro
+      color: '#1e3a8a',   // Colore (es. bianco caldo/avorio per quadro scuro, oppure '#1a1817' per quadro chiaro)
+      delay: 2000,        // Parte 2 secondi (2000ms) dopo il caricamento della copertina
+      speed: 1.0          // Velocità di scrittura
+    });
+  </script>
 </body>
 </html>
